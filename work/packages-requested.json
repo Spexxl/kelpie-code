@@ -1,0 +1,19 @@
+[
+  "pi-subagents",
+  "@narumitw/pi-plan-mode",
+  "pi-goal-x",
+  "pi-memory",
+  "@lenard9191/pi-project-profile",
+  "@ff-labs/pi-fff",
+  "pi-debug-mode",
+  "pi-agent-browser-native",
+  "@m4riok/pi-ide-bridge",
+  "pi-cc-extensions",
+  "@gagansd/pi-web-search",
+  "pi-better-background-tasks",
+  "pi-sandbox",
+  "@narumitw/pi-usage",
+  "@juicesharp/rpiv-ask-user-question",
+  "@juicesharp/rpiv-todo",
+  "@dreki-gg/pi-ask-mode"
+]

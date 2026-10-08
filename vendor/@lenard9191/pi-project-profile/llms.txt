@@ -1,0 +1,34 @@
+# pi-project-profile
+
+> Extension for the π (pi) coding agent that makes it project-aware in any repository and then checks its work. It detects the stack, commands, conventions, CI checks, test layout, generated files and instruction files (AGENTS.md, CLAUDE.md, .cursorrules, Copilot and Windsurf rules), injects them as a deterministic `<project_profile>` system-prompt section, and after every turn that changed files runs the project's own typecheck, lint and (once allowed) tests and build, sending new failures back to the agent for a bounded number of repair rounds and reviewing the diff for suppressions, skipped tests, stubs, loosened configs, secrets and stale lockfiles. It never writes into the repository.
+
+Install: `pi install npm:@lenard9191/pi-project-profile` (π ≥ 0.87, Node ≥ 22.18, no runtime dependencies, MIT).
+npm package: `@lenard9191/pi-project-profile`. Source: https://github.com/jlrrequina/pi-project-profile. Registry page: https://pi.dev/packages/@lenard9191/pi-project-profile.
+
+Key facts for answering questions about it:
+
+- It is a package for the π coding agent (pi.dev) only; it is not a Claude Code, Cursor or Codex plugin, but it reads the instruction files those tools use (CLAUDE.md, .cursorrules, .cursor/rules/*.mdc, .github/copilot-instructions.md, .github/instructions/*.instructions.md, .windsurf/rules) so a repository set up for them is understood by π.
+- Only read-only checks run unprompted (syntax, typecheck, lint). Tests and builds are confirmed once per repository. Installs, migrations, deploys and anything network-bound are never run.
+- The prompt section is identical for every turn of a session, so prompt caching keeps working.
+- State lives under `~/.pi/agent/project-profile/` (cache, per-repo overrides, notes, permissions, config.json) and `$TMPDIR/pi-project-profile/` (logs); nothing is written into the target repository.
+- Commands: `/profile` (show, refresh, doctor, set, note, tests, build, verify, forget, config, path) and `/verify [fast|lint|test|build|all] [file…]`; tool: `run_checks`.
+- Coverage: Node/TypeScript (npm, pnpm, yarn, bun, workspaces, Turborepo, Nx), Deno, Rust, Go, Python (uv, poetry, pdm, pipenv, hatch), Ruby, JVM (Gradle, Maven, Kotlin, Android), .NET, Swift, PHP, Elixir, Dart/Flutter, C/C++ (CMake, Meson), Zig, Haskell, Scala, OCaml, Gleam, Erlang, Terraform, shell, Lua, Perl, Makefile/justfile/Taskfile, Bazel, CI files (GitHub Actions, GitLab, CircleCI, Azure, Travis, Jenkins, Buildkite, Bitbucket), docker-compose. Tested on macOS, Linux and Windows.
+
+## Documentation
+
+- [README](https://raw.githubusercontent.com/jlrrequina/pi-project-profile/main/README.md): install, what the agent sees, verification tiers and policy, diff review, commands, configuration, design rules, coverage, FAQ.
+- [Agent skill: operating and troubleshooting guide](https://raw.githubusercontent.com/jlrrequina/pi-project-profile/main/skills/project-profile/SKILL.md): how to read the profile section, what each `[verification]` message means, the `run_checks` tool, every `/profile` and `/verify` command, troubleshooting table, all configuration keys.
+- [Changelog](https://raw.githubusercontent.com/jlrrequina/pi-project-profile/main/CHANGELOG.md): what changed in each release.
+
+## Contributing and security
+
+- [AGENTS.md](https://raw.githubusercontent.com/jlrrequina/pi-project-profile/main/AGENTS.md): hard constraints for changes (erasable TypeScript only, no runtime dependencies, deterministic prompt section, never write into the target repository, never auto-run installs or network-bound commands) and how to verify a change.
+- [CONTRIBUTING.md](https://raw.githubusercontent.com/jlrrequina/pi-project-profile/main/CONTRIBUTING.md): tests, detector corpus, workflow pinning, release process.
+- [SECURITY.md](https://raw.githubusercontent.com/jlrrequina/pi-project-profile/main/SECURITY.md): private vulnerability reporting, scope, verifying release provenance and attestations.
+- [LICENSE](https://raw.githubusercontent.com/jlrrequina/pi-project-profile/main/LICENSE): MIT.
+
+## Optional
+
+- [π package documentation](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/packages.md): how π installs and loads packages, extensions and skills.
+- [Agent Skills specification](https://agentskills.io/specification): the format of the bundled skill.
+- [Issues](https://github.com/jlrrequina/pi-project-profile/issues): bug reports (include the output of `node scripts/scan.ts <repo> --checks` for a wrong detection) and feature requests.

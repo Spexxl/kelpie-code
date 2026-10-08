@@ -1,0 +1,375 @@
+import { mkdirSync, mkdtempSync, readFileSync, realpathSync, rmSync, symlinkSync } from "node:fs";
+import { createServer } from "node:net";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import test, { mock, type TestContext } from "node:test";
+import { fileURLToPath } from "node:url";
+
+import { SandboxManager } from "@carderne/sandbox-runtime";
+import assert from "node:assert/strict";
+
+import { DEFAULT_CONFIG, mergeConfigLayers } from "../src/config.ts";
+import { canonicalizePath } from "../src/policy.ts";
+import {
+  buildRuntimeConfig,
+  createSandboxedBashOps,
+  extractBlockedWritePath,
+  resolveAllowances,
+  supportsNodeEnvProxy,
+} from "../src/sandbox-runtime.ts";
+
+function shellQuote(value: string): string {
+  return `'${value.replaceAll("'", `'\\''`)}'`;
+}
+
+function createExecTestContext(t: TestContext) {
+  const cwd = mkdtempSync(join(tmpdir(), "pi-sandbox-exec-"));
+  const backgroundPidPaths: string[] = [];
+
+  // Exercise exec without an OS sandbox session: identity wrap, no SSH proxy.
+  mock.method(SandboxManager, "wrapWithSandbox", async (command: string) => command);
+  t.after(() => {
+    try {
+      for (const pidPath of backgroundPidPaths) terminateRecordedProcess(pidPath);
+    } finally {
+      mock.restoreAll();
+      rmSync(cwd, { recursive: true, force: true });
+    }
+  });
+
+  return {
+    cwd,
+    exec: createSandboxedBashOps(SandboxManager, undefined, false).exec,
+    trackBackgroundProcess: (pidPath: string) => backgroundPidPaths.push(pidPath),
+  };
+}
+
+function terminateRecordedProcess(pidPath: string): void {
+  try {
+    const pid = Number.parseInt(readFileSync(pidPath, "utf8"), 10);
+    process.kill(pid, "SIGKILL");
+  } catch (error) {
+    if (
+      !(error instanceof Error) ||
+      !("code" in error) ||
+      (error.code !== "ENOENT" && error.code !== "ESRCH")
+    ) {
+      throw error;
+    }
+  }
+}
+
+function backgroundNodeCommand(cwd: string, source: string): { command: string; pidPath: string } {
+  const pidPath = join(cwd, "background.pid");
+  const childSource = [
+    `require("node:fs").writeFileSync(${JSON.stringify(pidPath)}, String(process.pid));`,
+    source,
+  ].join("\n");
+  const command = [
+    `${shellQuote(process.execPath)} -e ${shellQuote(childSource)} &`,
+    `while [ ! -s ${shellQuote(pidPath)} ]; do sleep 0.01; done`,
+  ].join(" ");
+  return { command, pidPath };
+}
+
+test("buildRuntimeConfig adds session allowances without mutating config", () => {
+  const runtime = buildRuntimeConfig(DEFAULT_CONFIG, {
+    domains: ["example.com"],
+    readPaths: ["/read"],
+    writePaths: ["/write"],
+  });
+  assert.equal(runtime.network?.allowedDomains?.includes("example.com"), true);
+  assert.equal(runtime.filesystem?.allowRead?.includes("/read"), true);
+  assert.equal(runtime.filesystem?.allowRead?.includes("/write"), true);
+  assert.equal(runtime.filesystem?.allowWrite?.includes("/write"), true);
+  assert.equal(DEFAULT_CONFIG.network?.allowedDomains?.includes("example.com"), false);
+});
+
+function withSshAuthSock<T>(value: string | undefined, fn: () => T): T {
+  const previous = process.env.SSH_AUTH_SOCK;
+  if (value === undefined) delete process.env.SSH_AUTH_SOCK;
+  else process.env.SSH_AUTH_SOCK = value;
+  try {
+    return fn();
+  } finally {
+    if (previous === undefined) delete process.env.SSH_AUTH_SOCK;
+    else process.env.SSH_AUTH_SOCK = previous;
+  }
+}
+
+test("buildRuntimeConfig does not allow SSH_AUTH_SOCK unless allowSSHAgentSocket is enabled", () => {
+  withSshAuthSock("/tmp/ssh-agent.sock", () => {
+    const runtime = buildRuntimeConfig(DEFAULT_CONFIG);
+    assert.equal(runtime.network?.allowUnixSockets, undefined);
+  });
+});
+
+test("buildRuntimeConfig adds the real SSH_AUTH_SOCK path when allowSSHAgentSocket is enabled", async () => {
+  const root = mkdtempSync(join(tmpdir(), "pi-sandbox-ssh-agent-"));
+  const realDir = join(root, "real");
+  const linkDir = join(root, "var");
+  mkdirSync(realDir);
+  symlinkSync(realDir, linkDir);
+  const socketPath = join(realDir, "Listeners");
+  const symlinkPath = join(linkDir, "Listeners");
+  const existing = ["/existing.sock"];
+  const config = {
+    ...DEFAULT_CONFIG,
+    network: {
+      ...DEFAULT_CONFIG.network!,
+      allowSSHAgentSocket: true,
+      allowUnixSockets: existing,
+    },
+  };
+  const server = createServer();
+  await new Promise<void>((resolve, reject) => {
+    server.once("error", reject);
+    server.listen(socketPath, resolve);
+  });
+
+  try {
+    withSshAuthSock(symlinkPath, () => {
+      const runtime = buildRuntimeConfig(config);
+      const resolved = realpathSync(socketPath);
+      assert.deepEqual(runtime.network?.allowUnixSockets, ["/existing.sock", resolved]);
+      assert.deepEqual(config.network?.allowUnixSockets, existing);
+    });
+  } finally {
+    await new Promise<void>((resolve) => server.close(() => resolve()));
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test("buildRuntimeConfig does not allow a directory SSH_AUTH_SOCK", () => {
+  const root = mkdtempSync(join(tmpdir(), "pi-sandbox-ssh-agent-dir-"));
+  const config = {
+    ...DEFAULT_CONFIG,
+    network: {
+      ...DEFAULT_CONFIG.network!,
+      allowSSHAgentSocket: true,
+      allowUnixSockets: ["/existing.sock"],
+    },
+  };
+
+  try {
+    withSshAuthSock(root, () => {
+      const runtime = buildRuntimeConfig(config);
+      assert.deepEqual(runtime.network?.allowUnixSockets, ["/existing.sock"]);
+      assert.equal(runtime.network?.allowUnixSockets?.includes(realpathSync(root)), false);
+    });
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test("buildRuntimeConfig does not allow a missing SSH_AUTH_SOCK path", () => {
+  const config = {
+    ...DEFAULT_CONFIG,
+    network: {
+      ...DEFAULT_CONFIG.network!,
+      allowSSHAgentSocket: true,
+      allowUnixSockets: ["/existing.sock"],
+    },
+  };
+
+  withSshAuthSock("/tmp/pi-sandbox-missing-ssh-agent.sock", () => {
+    const runtime = buildRuntimeConfig(config);
+    assert.deepEqual(runtime.network?.allowUnixSockets, ["/existing.sock"]);
+  });
+});
+
+test("buildRuntimeConfig canonicalizes non-glob filesystem paths", () => {
+  const runtime = buildRuntimeConfig({
+    ...DEFAULT_CONFIG,
+    filesystem: {
+      ...DEFAULT_CONFIG.filesystem!,
+      denyRead: ["/tmp"],
+      allowRead: [],
+      allowWrite: ["/tmp"],
+      denyWrite: ["*.key"],
+    },
+  });
+
+  assert.deepEqual(runtime.filesystem?.denyRead, [canonicalizePath("/tmp")]);
+  assert.equal(runtime.filesystem?.allowRead?.includes(canonicalizePath("/tmp")), true);
+  assert.deepEqual(runtime.filesystem?.allowWrite, [canonicalizePath("/tmp")]);
+  assert.deepEqual(runtime.filesystem?.denyWrite, ["*.key"]);
+});
+
+test("buildRuntimeConfig forwards denyMandatoryCwdFiles to the runtime", () => {
+  // The filesystem object is rebuilt field by field, so a config key that is
+  // not listed here is silently dropped before reaching the runtime.
+  // Not in the released runtime type until sandbox-runtime PR #21 lands.
+  type MandatoryCwdFlag = { denyMandatoryCwdFiles?: boolean };
+  const read = (fs: unknown) => (fs as MandatoryCwdFlag).denyMandatoryCwdFiles;
+
+  const optedOut = buildRuntimeConfig({
+    ...DEFAULT_CONFIG,
+    filesystem: { ...DEFAULT_CONFIG.filesystem!, denyMandatoryCwdFiles: false },
+  });
+  assert.equal(read(optedOut.filesystem), false);
+
+  const optedIn = buildRuntimeConfig({
+    ...DEFAULT_CONFIG,
+    filesystem: { ...DEFAULT_CONFIG.filesystem!, denyMandatoryCwdFiles: true },
+  });
+  assert.equal(read(optedIn.filesystem), true);
+
+  // Unset must stay unset so the runtime applies its own default.
+  const unset = buildRuntimeConfig(DEFAULT_CONFIG);
+  assert.equal(read(unset.filesystem), undefined);
+});
+
+test("denyMandatoryCwdFiles survives the config layer merge", () => {
+  const merged = mergeConfigLayers(
+    DEFAULT_CONFIG,
+    { filesystem: { denyMandatoryCwdFiles: true } },
+    { filesystem: { denyMandatoryCwdFiles: false } },
+  );
+  assert.equal(merged.filesystem?.denyMandatoryCwdFiles, false);
+});
+
+test("buildRuntimeConfig exposes the bundled seccomp helper on Linux", () => {
+  const runtime = buildRuntimeConfig(DEFAULT_CONFIG, undefined, "linux");
+  const runtimeEntryUrl = import.meta.resolve("@carderne/sandbox-runtime");
+  const seccompPath = canonicalizePath(
+    fileURLToPath(new URL("../vendor/seccomp", runtimeEntryUrl)),
+  );
+
+  assert.equal(runtime.filesystem?.allowRead?.includes(seccompPath), true);
+});
+
+test("resolveAllowances makes configured and session write paths readable", () => {
+  const config = {
+    ...DEFAULT_CONFIG,
+    filesystem: {
+      ...DEFAULT_CONFIG.filesystem!,
+      allowRead: [],
+      allowWrite: ["/configured-write"],
+    },
+  };
+  const effective = resolveAllowances(config, {
+    domains: [],
+    readPaths: [],
+    writePaths: ["/session-write"],
+  });
+
+  assert.deepEqual(effective.readPaths, ["/configured-write", "/session-write"]);
+  assert.deepEqual(effective.writePaths, ["/configured-write", "/session-write"]);
+});
+
+test("extractBlockedWritePath recognizes shell sandbox errors", () => {
+  assert.equal(
+    extractBlockedWritePath("bash: line 1: /private/file: Operation not permitted"),
+    "/private/file",
+  );
+  assert.equal(extractBlockedWritePath("permission denied"), null);
+});
+
+test("supportsNodeEnvProxy observes Node release boundaries", () => {
+  assert.equal(supportsNodeEnvProxy("22.20.0"), false);
+  assert.equal(supportsNodeEnvProxy("22.21.0"), true);
+  assert.equal(supportsNodeEnvProxy("23.9.0"), false);
+  assert.equal(supportsNodeEnvProxy("24.0.0"), true);
+});
+
+test("exec resolves when the command exits even if a daemonized grandchild holds the stdio pipes", async (t) => {
+  const { cwd, exec, trackBackgroundProcess } = createExecTestContext(t);
+  const { command, pidPath } = backgroundNodeCommand(cwd, "setInterval(() => {}, 1000);");
+  trackBackgroundProcess(pidPath);
+
+  // The background process inherits stdout/stderr indefinitely. Exec should
+  // return after its post-exit idle grace, not wait for natural pipe EOF.
+  const started = Date.now();
+  const { exitCode } = await exec(command, cwd, { onData: () => {} });
+  const elapsed = Date.now() - started;
+
+  assert.equal(exitCode, 0);
+  assert.ok(elapsed < 2000, `exec returned after ${elapsed}ms; expected early teardown`);
+});
+
+test("exec drains output that stays active after the direct child exits", async (t) => {
+  const { cwd, exec, trackBackgroundProcess } = createExecTestContext(t);
+  const writerSource = `
+let tick = 0;
+const writer = setInterval(() => {
+  tick += 1;
+  process.stdout.write(\`stdout-\${tick}\\n\`);
+  process.stderr.write(\`stderr-\${tick}\\n\`);
+  if (tick === 6) clearInterval(writer);
+}, 50);
+setInterval(() => {}, 1000);
+`;
+  const { command, pidPath } = backgroundNodeCommand(cwd, writerSource);
+  trackBackgroundProcess(pidPath);
+
+  const chunks: Buffer[] = [];
+  const started = Date.now();
+  const { exitCode } = await exec(command, cwd, { onData: (data) => chunks.push(data) });
+  const elapsed = Date.now() - started;
+  const output = Buffer.concat(chunks).toString("utf8");
+
+  assert.equal(exitCode, 0);
+  for (let tick = 1; tick <= 6; tick += 1) {
+    assert.ok(output.includes(`stdout-${tick}\n`), `missing stdout token ${tick}`);
+    assert.ok(output.includes(`stderr-${tick}\n`), `missing stderr token ${tick}`);
+  }
+  assert.ok(elapsed < 2000, `exec returned after ${elapsed}ms; expected idle teardown`);
+});
+
+test("exec returns a nonzero exit code", async (t) => {
+  const { cwd, exec } = createExecTestContext(t);
+
+  assert.deepEqual(await exec("exit 7", cwd, { onData: () => {} }), { exitCode: 7 });
+});
+
+test("exec rejects after its command timeout", async (t) => {
+  const { cwd, exec } = createExecTestContext(t);
+
+  await assert.rejects(
+    exec("sleep 5", cwd, { onData: () => {}, timeout: 0.05 }),
+    new Error("timeout:0.05"),
+  );
+});
+
+test("exec rejects when an in-flight command is aborted", async (t) => {
+  const { cwd, exec } = createExecTestContext(t);
+  const controller = new AbortController();
+  const abortTimer = setTimeout(() => controller.abort(), 50);
+  t.after(() => clearTimeout(abortTimer));
+
+  await assert.rejects(
+    exec("sleep 5", cwd, { onData: () => {}, signal: controller.signal }),
+    new Error("aborted"),
+  );
+});
+
+test("buildRuntimeConfig forwards credentials verbatim", () => {
+  const credentials = {
+    envVars: [{ name: "GITHUB_TOKEN", mode: "deny" as const }],
+    files: [{ path: "~/.pi/agent/auth.json", mode: "deny" as const }],
+  };
+
+  assert.deepEqual(buildRuntimeConfig({ ...DEFAULT_CONFIG, credentials }).credentials, credentials);
+  assert.equal(buildRuntimeConfig(DEFAULT_CONFIG).credentials, undefined);
+});
+
+test("network.disabled omits allowedDomains so the runtime skips network isolation", () => {
+  const runtime = buildRuntimeConfig({
+    ...DEFAULT_CONFIG,
+    network: { ...DEFAULT_CONFIG.network!, disabled: true },
+  });
+  // The runtime treats absent allowedDomains as "no network restriction"
+  // (needsNetworkRestriction stays false: no --unshare-net, no proxy).
+  assert.equal(runtime.network?.allowedDomains, undefined);
+  // The network object must survive — the runtime reads other keys off it
+  // unconditionally (e.g. parentProxy at initialize).
+  assert.notEqual(runtime.network, undefined);
+  assert.deepEqual(runtime.network?.deniedDomains, []);
+  // `disabled` is a pi-sandbox-only key and must not leak to the runtime config.
+  assert.equal((runtime.network as { disabled?: boolean }).disabled, undefined);
+
+  // Default (not disabled) still emits the allowlist.
+  const normal = buildRuntimeConfig(DEFAULT_CONFIG);
+  assert.equal(Array.isArray(normal.network?.allowedDomains), true);
+});

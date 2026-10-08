@@ -1,0 +1,76 @@
+{
+  "name": "@narumitw/pi-usage",
+  "version": "0.64.1",
+  "description": "Pi extension that shows current-account usage and DeepSeek API balance for supported providers.",
+  "type": "module",
+  "license": "MIT",
+  "private": false,
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "pi",
+    "usage",
+    "quota",
+    "balance",
+    "deepseek",
+    "fireworks",
+    "baseten",
+    "vercel-ai-gateway",
+    "codex",
+    "command-code",
+    "kimi",
+    "kimi-coding",
+    "moonshot",
+    "moonshotai",
+    "minimax",
+    "token-plan",
+    "copilot",
+    "openrouter",
+    "opencode",
+    "zen",
+    "zai",
+    "glm",
+    "xai",
+    "grok"
+  ],
+  "files": [
+    "src",
+    "dist",
+    "docs",
+    "README.md",
+    "LICENSE"
+  ],
+  "pi": {
+    "extensions": [
+      "./dist/index.ts"
+    ]
+  },
+  "scripts": {
+    "build": "node scripts/build-runtime.mjs",
+    "check": "npm run build && biome check --vcs-use-ignore-file=false src test scripts package.json tsconfig.json README.md && npm run typecheck",
+    "format": "biome check --write --vcs-use-ignore-file=false src test scripts package.json tsconfig.json README.md",
+    "typecheck": "tsc --noEmit",
+    "prepack": "npm run build"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-ai": "1.0.2",
+    "@earendil-works/pi-coding-agent": "1.0.2",
+    "@earendil-works/pi-tui": "1.0.2",
+    "@types/node": "26.6.4",
+    "esbuild": "0.28.2",
+    "typescript": "7.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/narumiruna/pi-extensions",
+    "directory": "packages/pi-usage"
+  },
+  "dependencies": {
+    "@narumitw/pi-tui-kit": "^0.61.0"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "name": "pi-ask-codemode-local",
+  "version": "0.3.0-local.2",
+  "description": "Local Ask/Build integration for native Pi CodeMode; derived from pi-agent-modes 0.3.0",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "author": "",
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "pi-coding-agent",
+    "modes",
+    "agent-modes",
+    "ask",
+    "plan",
+    "build",
+    "review",
+    "debug",
+    "yolo"
+  ],
+  "files": [
+    "extensions",
+    "src",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "pi": {
+    "extensions": [
+      "./extensions"
+    ]
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test tests/*.test.ts"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*",
+    "typebox": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yoyo406/pi-agent-modes.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yoyo406/pi-agent-modes/issues"
+  },
+  "homepage": "https://github.com/yoyo406/pi-agent-modes#readme",
+  "publishConfig": {
+    "access": "public"
+  }
+}

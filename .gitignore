@@ -1,0 +1,16 @@
+node_modules/
+.env
+.env.*
+!.env.example
+auth.json
+credentials.json
+*.pem
+*.key
+__pycache__/
+*.pyc
+work/fixtures/
+work/test-project/
+background-fixture-*/
+*.log
+*.raw.log
+.DS_Store

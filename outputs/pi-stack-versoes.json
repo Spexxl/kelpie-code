@@ -1,0 +1,710 @@
+{
+  "schemaVersion": 2,
+  "reportStatus": "reviewed and fixed; installed offline compatibility checks passed; live credentials/UI checks pending",
+  "generatedAt": "2026-10-08T14:07:14+00:00",
+  "pi": {
+    "package": "@earendil-works/pi-coding-agent",
+    "version": "1.1.0",
+    "path": "/home/sll/.nvm/versions/node/v24.21.0/lib/node_modules/@earendil-works/pi-coding-agent"
+  },
+  "node": {
+    "version": "24.21.0",
+    "npm": "11.19.0",
+    "defaultNvm": "24.21.0",
+    "previous22Preserved": true
+  },
+  "runtime": {
+    "agentBrowserCLI": "0.38.2",
+    "chromium": "156.0.8078.4",
+    "playwrightChromiumRevision": "1248",
+    "jevBrowserMcp": "@jkudish/jev-browser@0.8.4"
+  },
+  "packageCounts": {
+    "declarations": 19,
+    "active": 16,
+    "filteredRetained": 3,
+    "removedFromSettings": "pi-agent-browser-native@0.9.3"
+  },
+  "packages": [
+    {
+      "name": "pi-subagents",
+      "version": "0.76.1",
+      "source": "npm:pi-subagents@0.76.1",
+      "installed": true,
+      "configuredEnabled": true,
+      "repository": {
+        "url": "git+https://github.com/nicobailon/pi-subagents.git",
+        "type": "git"
+      },
+      "engines": null,
+      "peerDependencies": {
+        "typebox": "*",
+        "@earendil-works/pi-ai": ">=0.86.1",
+        "@earendil-works/pi-tui": "*",
+        "@earendil-works/pi-agent-core": "*",
+        "@earendil-works/pi-coding-agent": "*"
+      },
+      "deprecated": null,
+      "installationEvidence": "work/install-pi-subagents.log",
+      "state": "active"
+    },
+    {
+      "name": "@narumitw/pi-plan-mode",
+      "version": "0.59.2",
+      "source": "npm:@narumitw/pi-plan-mode@0.59.2",
+      "installed": true,
+      "configuredEnabled": true,
+      "repository": {
+        "url": "git+https://github.com/narumiruna/pi-extensions.git",
+        "type": "git",
+        "directory": "packages/pi-plan-mode"
+      },
+      "engines": null,
+      "peerDependencies": {
+        "@earendil-works/pi-tui": "*",
+        "@earendil-works/pi-coding-agent": "*"
+      },
+      "deprecated": null,
+      "installationEvidence": "work/install-narumitw_pi-plan-mode.log",
+      "state": "active"
+    },
+    {
+      "name": "pi-goal-x",
+      "version": "0.32.3",
+      "source": "npm:pi-goal-x@0.32.3",
+      "installed": true,
+      "configuredEnabled": true,
+      "repository": {
+        "url": "git+https://github.com/tmonk/pi-goal-x.git",
+        "type": "git"
+      },
+      "engines": {
+        "node": ">=22.15.0"
+      },
+      "peerDependencies": {
+        "typebox": "^1.3.11",
+        "@earendil-works/pi-ai": ">=0.83.0 <2.0.0",
+        "@earendil-works/pi-tui": ">=0.83.0 <2.0.0",
+        "@earendil-works/pi-coding-agent": ">=0.83.0 <2.0.0"
+      },
+      "deprecated": null,
+      "installationEvidence": "work/install-pi-goal-x.log",
+      "state": "active"
+    },
+    {
+      "name": "pi-memory",
+      "version": "0.4.2",
+      "source": "npm:pi-memory@0.4.2",
+      "installed": true,
+      "configuredEnabled": true,
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jayzeng/pi-memory.git"
+      },
+      "engines": {
+        "node": ">=22.19.0"
+      },
+      "peerDependencies": {
+        "@earendil-works/pi-ai": ">=0.81.1",
+        "@earendil-works/pi-coding-agent": ">=0.81.1"
+      },
+      "deprecated": null,
+      "installationEvidence": "work/install-pi-memory.log",
+      "state": "active"
+    },
+    {
+      "name": "@lenard9191/pi-project-profile",
+      "version": "1.3.0",
+      "source": "npm:@lenard9191/pi-project-profile@1.3.0",
+      "installed": true,
+      "configuredEnabled": true,
+      "repository": {
+        "url": "git+https://github.com/jlrrequina/pi-project-profile.git",
+        "type": "git"
+      },
+      "engines": {
+        "node": ">=22.18"
+      },
+      "peerDependencies": {
+        "@earendil-works/pi-ai": ">=0.87.0",
+        "@earendil-works/pi-tui": ">=0.87.0",
+        "@earendil-works/pi-coding-agent": ">=0.87.0"
+      },
+      "deprecated": null,
+      "installationEvidence": "work/install-lenard9191_pi-project-profile.log",
+      "state": "active"
+    },
+    {
+      "name": "@ff-labs/pi-fff",
+      "version": "0.11.0",
+      "source": "npm:@ff-labs/pi-fff@0.11.0",
+      "installed": true,
+      "configuredEnabled": true,
+      "repository": {
+        "url": "git+https://github.com/dmtrKovalenko/fff.git",
+        "type": "git",
+        "directory": "packages/pi-fff"
+      },
+      "engines": null,
+      "peerDependencies": {
+        "@sinclair/typebox": "*",
+        "@earendil-works/pi-tui": "*",
+        "@earendil-works/pi-coding-agent": "*"
+      },
+      "deprecated": null,
+      "installationEvidence": "work/install-ff-labs_pi-fff.log",
+      "state": "active"
+    },
+    {
+      "name": "pi-debug-mode",
+      "version": "0.1.12",
+      "source": "npm:pi-debug-mode@0.1.12",
+      "installed": true,
+      "configuredEnabled": true,
+      "repository": {
+        "url": "git+https://github.com/liush2yuxjtu/pi-debug-mode.git",
+        "type": "git"
+      },
+      "engines": null,
+      "peerDependencies": {
+        "typebox": "*",
+        "@earendil-works/pi-coding-agent": "*"
+      },
+      "deprecated": null,
+      "installationEvidence": "work/install-pi-debug-mode.log",
+      "state": "active"
+    },
+    {
+      "name": "@m4riok/pi-ide-bridge",
+      "version": "0.2.0",
+      "source": "npm:@m4riok/pi-ide-bridge@0.2.0",
+      "installed": true,
+      "configuredEnabled": true,
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/m4riok/pi-ide-bridge.git"
+      },
+      "engines": null,
+      "peerDependencies": {
+        "@earendil-works/pi-coding-agent": "*",
+        "typebox": "*"
+      },
+      "deprecated": null,
+      "installationEvidence": "work/install-m4riok_pi-ide-bridge.log",
+      "state": "active"
+    },
+    {
+      "name": "pi-cc-extensions",
+      "version": "0.9.11",
+      "source": "npm:pi-cc-extensions@0.9.11",
+      "installed": true,
+      "configuredEnabled": true,
+      "repository": {
+        "url": "git+https://github.com/minuque/pi-cc-extensions.git",
+        "type": "git"
+      },
+      "engines": {
+        "node": ">=22.19.0"
+      },
+      "peerDependencies": {
+        "@earendil-works/pi-ai": "*",
+        "@earendil-works/pi-tui": "*",
+        "@earendil-works/pi-coding-agent": "*"
+      },
+      "deprecated": null,
+      "installationEvidence": "work/install-pi-cc-extensions.log",
+      "state": "active"
+    },
+    {
+      "name": "@gagansd/pi-web-search",
+      "version": "0.2.1",
+      "source": "npm:@gagansd/pi-web-search@0.2.1",
+      "installed": true,
+      "configuredEnabled": true,
+      "repository": {
+        "url": "git+https://github.com/GaganSD/pi-extensions.git",
+        "type": "git",
+        "directory": "pi-web-search"
+      },
+      "engines": {
+        "node": ">=22.19.0"
+      },
+      "peerDependencies": {
+        "typebox": "*",
+        "@earendil-works/pi-ai": "*",
+        "@earendil-works/pi-tui": "*",
+        "@earendil-works/pi-coding-agent": "*"
+      },
+      "deprecated": null,
+      "installationEvidence": "work/install-gagansd_pi-web-search.log",
+      "state": "active"
+    },
+    {
+      "name": "pi-better-background-tasks",
+      "version": "0.8.0",
+      "source": "npm:pi-better-background-tasks@0.8.0",
+      "installed": true,
+      "configuredEnabled": false,
+      "repository": {
+        "url": "git+https://github.com/1aboveio/pi-better-harness.git",
+        "type": "git",
+        "directory": "packages/pi-better-background-tasks"
+      },
+      "engines": null,
+      "peerDependencies": {
+        "typebox": "*",
+        "@earendil-works/pi-coding-agent": "*"
+      },
+      "deprecated": null,
+      "installationEvidence": "work/install-pi-better-background-tasks.log",
+      "disabledReason": "Substituído pelo fork local que integra os processos com a política do Sandbox.",
+      "state": "filtered; retained for rollback"
+    },
+    {
+      "name": "pi-sandbox",
+      "version": "0.7.1",
+      "source": "npm:pi-sandbox@0.7.1",
+      "installed": true,
+      "configuredEnabled": false,
+      "repository": {
+        "url": "git+https://github.com/carderne/pi-sandbox.git",
+        "type": "git"
+      },
+      "engines": null,
+      "peerDependencies": {
+        "@earendil-works/pi-tui": "*",
+        "@earendil-works/pi-coding-agent": "^0.80.0"
+      },
+      "deprecated": null,
+      "installationEvidence": "work/install-pi-sandbox.log",
+      "state": "filtered; retained for rollback",
+      "disabledReason": "Substituído pela cópia local com ponte background-service:v1."
+    },
+    {
+      "name": "@narumitw/pi-usage",
+      "version": "0.64.1",
+      "source": "npm:@narumitw/pi-usage@0.64.1",
+      "installed": true,
+      "configuredEnabled": true,
+      "repository": {
+        "url": "git+https://github.com/narumiruna/pi-extensions.git",
+        "type": "git",
+        "directory": "packages/pi-usage"
+      },
+      "engines": null,
+      "peerDependencies": {
+        "@earendil-works/pi-ai": "*",
+        "@earendil-works/pi-tui": "*",
+        "@earendil-works/pi-coding-agent": "*"
+      },
+      "deprecated": null,
+      "installationEvidence": "work/install-narumitw_pi-usage.log",
+      "state": "active"
+    },
+    {
+      "name": "@juicesharp/rpiv-ask-user-question",
+      "version": "2.12.0",
+      "source": "npm:@juicesharp/rpiv-ask-user-question@2.12.0",
+      "installed": true,
+      "configuredEnabled": true,
+      "repository": {
+        "url": "git+https://github.com/juicesharp/rpiv-mono.git",
+        "type": "git",
+        "directory": "packages/rpiv-ask-user-question"
+      },
+      "engines": null,
+      "peerDependencies": {
+        "typebox": "*",
+        "@juicesharp/rpiv-i18n": "*",
+        "@earendil-works/pi-tui": "*",
+        "@earendil-works/pi-coding-agent": "*"
+      },
+      "deprecated": null,
+      "installationEvidence": "work/install-juicesharp_rpiv-ask-user-question.log",
+      "state": "active"
+    },
+    {
+      "name": "@juicesharp/rpiv-todo",
+      "version": "2.12.0",
+      "source": "npm:@juicesharp/rpiv-todo@2.12.0",
+      "installed": true,
+      "configuredEnabled": true,
+      "repository": {
+        "url": "git+https://github.com/juicesharp/rpiv-mono.git",
+        "type": "git",
+        "directory": "packages/rpiv-todo"
+      },
+      "engines": null,
+      "peerDependencies": {
+        "typebox": "*",
+        "@earendil-works/pi-ai": "*",
+        "@juicesharp/rpiv-i18n": "*",
+        "@earendil-works/pi-tui": "*",
+        "@earendil-works/pi-coding-agent": "*"
+      },
+      "deprecated": null,
+      "installationEvidence": "work/install-juicesharp_rpiv-todo.log",
+      "state": "active"
+    },
+    {
+      "name": "@dreki-gg/pi-ask-mode",
+      "version": "0.3.3",
+      "source": "npm:@dreki-gg/pi-ask-mode@0.3.3",
+      "installed": true,
+      "configuredEnabled": false,
+      "repository": {
+        "url": "git+https://github.com/dreki-gg/pi-extensions.git",
+        "type": "git",
+        "directory": "packages/ask-mode"
+      },
+      "engines": null,
+      "peerDependencies": {
+        "@earendil-works/pi-tui": "*",
+        "@earendil-works/pi-coding-agent": "*"
+      },
+      "deprecated": "No longer maintained.",
+      "installationEvidence": "work/install-dreki-gg_pi-ask-mode.log",
+      "disabledReason": "Descontinuado e incompatível com a política Code Mode; substituído pelo fork Ask local.",
+      "state": "filtered; retained for rollback"
+    },
+    {
+      "name": "pi-ask-codemode-local",
+      "version": "0.3.0-local.2",
+      "source": "/home/sll/.pi/agent/local-packages/pi-ask-codemode-local",
+      "installed": true,
+      "configuredEnabled": true,
+      "state": "active local fork",
+      "license": "MIT",
+      "derivedFrom": "pi-agent-modes@0.3.0",
+      "validation": "126/126 installed-source SDK assertions",
+      "evidence": "work/replacements/ask-fork-results.log"
+    },
+    {
+      "name": "pi-sandbox",
+      "version": "0.7.1+background-bridge.2",
+      "source": "/home/sll/.pi/agent/local-packages/pi-sandbox-background-bridge",
+      "installed": true,
+      "configuredEnabled": true,
+      "state": "active local fork",
+      "license": "MIT",
+      "upstream": "carderne/pi-sandbox@0.7.1",
+      "validation": "50 passed, 0 failed, 3 skipped (53 total)",
+      "evidence": "work/replacements/pi-sandbox-background-bridge/test/pi-sandbox-suite-final.log",
+      "peerDependencies": {
+        "@earendil-works/pi-coding-agent": "1.1.0"
+      }
+    },
+    {
+      "name": "pi-better-background-tasks",
+      "version": "0.8.0+carderne.2",
+      "source": "/home/sll/.pi/agent/local-packages/background-carderne",
+      "installed": true,
+      "configuredEnabled": true,
+      "state": "active local fork",
+      "license": "MIT",
+      "upstream": "pi-better-background-tasks@0.8.0",
+      "validation": "21/21 installed-source SDK regressions plus four watch-preparation regressions",
+      "evidence": "work/replacements/background-carderne/test/background-results.json"
+    }
+  ],
+  "replacedPackages": [
+    {
+      "name": "pi-agent-browser-native",
+      "version": "0.9.3",
+      "installed": false,
+      "configured": false,
+      "reason": "Removido; substituído pelo Jev Browser MCP. O CLI agent-browser permanece separado."
+    }
+  ],
+  "browser": {
+    "package": "@jkudish/jev-browser",
+    "version": "0.8.4",
+    "server": "jev-browser",
+    "tool": "jev_navigate",
+    "toolExposure": "codemode",
+    "serverExposure": "hidden",
+    "mcpEnabled": true,
+    "installDirectory": "/home/sll/.nvm/versions/node/v24.21.0/lib/node_modules/@jkudish/jev-browser",
+    "chromium": {
+      "version": "156.0.8078.4",
+      "revision": "1248"
+    },
+    "integration": {
+      "passed": 10,
+      "total": 10,
+      "evidence": "work/replacements/browser-tests.json"
+    },
+    "upstreamOfflineTests": {
+      "passed": 78,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": "work/replacements/browser-upstream-tests.log"
+    },
+    "liveKeyPresent": false,
+    "liveProviderCalls": false,
+    "sandboxInheritanceVerified": false,
+    "limitations": [
+      "Goal-based navigation is not functionally identical to agent-browser CLI.",
+      "Chromium/MCP executes outside pi-sandbox bash enforcement.",
+      "No live Jev decisions or public browsing were verified."
+    ]
+  },
+  "configuration": {
+    "settings": "/home/sll/.pi/agent/settings.json",
+    "modes": "/home/sll/.pi/agent/modes.config.json",
+    "mcp": "/home/sll/.pi/agent/mcp.json",
+    "defaultMode": "build",
+    "codeMode": "on",
+    "inlineBudget": 1500,
+    "defaultTools": [
+      "+codemode",
+      "+tool_search",
+      "+grep",
+      "+find",
+      "+ls"
+    ],
+    "askMode": {
+      "allowTools": [
+        "codemode",
+        "tool_search"
+      ],
+      "blockUnknownTools": true,
+      "bash": "deny",
+      "thinkingLevel": null,
+      "planMustBeOffBeforeEntry": true
+    },
+    "originalAskBackgroundSandbox": "installed but filtered to avoid duplicate extension loading"
+  },
+  "credentials": {
+    "jevKeyPresent": false,
+    "llmProviderAuthPresent": false,
+    "realJudgmentsOrPaidCalls": false,
+    "providerAuthRequiredForLiveResearch": true
+  },
+  "tests": {
+    "askMode": {
+      "passed": 126,
+      "failed": 0,
+      "scope": "Installed local fork through real Pi SDK; Code Mode on/only, native and MCP fixture reads, direct/nested denials, dynamic tools, Plan state/lifecycle",
+      "log": "work/replacements/ask-fork-results.log",
+      "result": "work/replacements/ask-fork-results.json"
+    },
+    "backgroundSandboxIntegration": {
+      "passed": 21,
+      "failed": 0,
+      "scope": "Installed local forks through Pi SDK; local jobs, cancellation, cwd, env policy, protected state, watch/resume, network policy, fail closed, explicit off, remote refusal",
+      "result": "work/replacements/background-carderne/test/background-results.json",
+      "harness": "work/replacements/background-carderne/test/background-regression.mjs"
+    },
+    "sandboxUnit": {
+      "total": 53,
+      "passed": 50,
+      "failed": 0,
+      "skipped": 3,
+      "log": "work/replacements/pi-sandbox-background-bridge/test/pi-sandbox-suite-final.log"
+    },
+    "browserIntegration": {
+      "passed": 10,
+      "failed": 0,
+      "result": "work/replacements/browser-tests.json"
+    },
+    "browserUpstreamOffline": {
+      "total": 78,
+      "passed": 78,
+      "failed": 0,
+      "skipped": 0,
+      "log": "work/replacements/browser-upstream-tests.log"
+    },
+    "combinedIndependentSuiteTotals": {
+      "passed": 298,
+      "failed": 0,
+      "skipped": 3,
+      "note": "Soma descritiva de sete suítes/verificações independentes; testes Jev 10+78 são as evidências anteriores, sem alteração no navegador."
+    },
+    "globalStackSmoke": {
+      "passed": 9,
+      "failed": 0,
+      "scope": "Actual installed global SDK load and headless mode commands; offline scripted assistant",
+      "result": "work/replacements/final-installed-stack-smoke.json"
+    },
+    "watchPreparation": {
+      "passed": 4,
+      "failed": 0,
+      "scope": "Real runtime/registry/processes with a delayed fixture policy provider",
+      "log": "work/replacements/background-carderne/test/review-green-watch.log"
+    },
+    "sourceTypechecks": {
+      "passed": 3,
+      "failed": 0,
+      "compiler": "TypeScript 5.9.3",
+      "scope": "Strict source graphs for Ask, Background and Sandbox; noEmit, skipLibCheck",
+      "evidence": [
+        "work/replacements/review-typecheck-ask.log",
+        "work/replacements/review-typecheck-background.log",
+        "work/replacements/review-typecheck-sandbox.log"
+      ]
+    }
+  },
+  "compatibilityMatrix": [
+    {
+      "id": 1,
+      "name": "Code Mode + Plan Mode",
+      "status": "partial",
+      "reason": "Leituras e bloqueios por Plan foram exercitados; aprovação interativa de plano não foi testada."
+    },
+    {
+      "id": 2,
+      "name": "Code Mode + Ask Mode local",
+      "status": "passed-offline",
+      "reason": "126/126 checks na cópia instalada; preserva Code Mode e nega escrita, Bash, tools desconhecidas e ativações enquanto Plan está ativo. Padrões sem configuração também testados."
+    },
+    {
+      "id": 3,
+      "name": "Code Mode + Sandbox",
+      "status": "partial",
+      "reason": "Suíte local 50/53 (3 skipped) e integrações de Sandbox exercitadas; UI de permissões e outras superfícies custom não foram certificadas."
+    },
+    {
+      "id": 4,
+      "name": "Sandbox + Background Tasks local",
+      "status": "passed-offline",
+      "reason": "21/21 integrações no SDK real; tarefas locais usam política corrente e falham fechadas, com limitações de rede após o fim da sessão."
+    },
+    {
+      "id": 5,
+      "name": "Subagents + Plan + Sandbox",
+      "status": "partial",
+      "reason": "Carregamento/listagem verificados; execução de filho real e herança de sandbox continuam pendentes."
+    },
+    {
+      "id": 6,
+      "name": "Plan Mode + Goal-X",
+      "status": "partial",
+      "reason": "Bloqueio e saída de Plan testados anteriormente; continuação autônoma real requer modelo autenticado."
+    },
+    {
+      "id": 7,
+      "name": "Goal-X + Todo",
+      "status": "partial",
+      "reason": "Uso básico e coexistência validados anteriormente; sincronização e UI ao vivo não foram testadas."
+    },
+    {
+      "id": 8,
+      "name": "Code Mode + IDE Bridge",
+      "status": "pending-ui",
+      "reason": "Pacote e complemento instalados; conexão e aprovação/rejeição real de diff não foram exercitadas."
+    },
+    {
+      "id": 9,
+      "name": "Browser Jev + Sandbox",
+      "status": "limited",
+      "reason": "Jev integrado via MCP/Code Mode, mas Chromium fica fora do confinamento de Bash do pi-sandbox."
+    },
+    {
+      "id": 10,
+      "name": "Web Search + Jev + Browser",
+      "status": "pending-credentials",
+      "reason": "Sem chave Jev ou credenciais de pesquisa; nenhuma pesquisa real foi feita."
+    },
+    {
+      "id": 11,
+      "name": "Memory + Goal + Compaction",
+      "status": "partial",
+      "reason": "Leitura/escrita e restauração sintética validadas; geração/resumo real por modelo não foi executado."
+    },
+    {
+      "id": 12,
+      "name": "FFF + Project Profile + Debug",
+      "status": "partial",
+      "reason": "Busca e comandos básicos foram exercitados anteriormente; ciclo de depuração guiado por modelo não foi executado."
+    },
+    {
+      "id": 13,
+      "name": "CC Extensions + Usage + Todo",
+      "status": "partial",
+      "reason": "Inicialização/comandos headless validados anteriormente; renderização visual e Usage autenticado estão pendentes."
+    },
+    {
+      "id": 14,
+      "name": "Ask User Question + Plan Mode",
+      "status": "partial",
+      "reason": "Registro e contrato headless verificados; formulários e respostas interativas permanecem pendentes."
+    }
+  ],
+  "review": {
+    "findingsFixed": [
+      "Ask unsafe fallback defaults",
+      "Malformed/invalid sandbox policy defaults and falsey explicit-off",
+      "Stale asynchronous sandbox preparation",
+      "Watch preparation cancellation/suspension/deadline race",
+      "Protected parent/descendant write-grant intersection",
+      "Watch confinement-notice persistence"
+    ],
+    "result": "Independent read-only re-review found no concrete remaining defect in the six corrected paths; credential-mode validation coercion also corrected.",
+    "scope": "Targeted source re-review plus isolated probes, not a full repository security audit."
+  },
+  "securityAdvisory": {
+    "id": "GHSA-86w9-cpqp-85rv",
+    "cve": "CVE-2026-85393",
+    "severity": "high",
+    "dependency": "node-forge@1.4.0 in sandbox runtime chain",
+    "fixedVersionListed": false,
+    "forcedDowngradeApplied": false,
+    "url": "https://github.com/advisories/GHSA-86w9-cpqp-85rv"
+  },
+  "backups": [
+    "/home/sll/.pi/backups/replacements-20261008T124905Z",
+    "/home/sll/.pi/backups/replacements-ask-background-20261008T132426Z",
+    "/home/sll/.pi/backups/revision-review-20261008T140040Z"
+  ],
+  "sources": [
+    "https://github.com/jkudish/jev-browser",
+    "https://github.com/carderne/pi-sandbox",
+    "https://github.com/1aboveio/pi-better-harness/tree/main/packages/pi-better-background-tasks",
+    "https://github.com/y-0-y-0/pi-agent-modes"
+  ],
+  "installedSourceParity": [
+    {
+      "package": "pi-ask-codemode-local",
+      "file": "extensions/index.ts",
+      "sha256": "2eba3f5d3353744e8e1a42d8356dff60ff6703279243b21518b04efd4460dda1",
+      "workspaceAndInstalledMatch": true
+    },
+    {
+      "package": "pi-ask-codemode-local",
+      "file": "src/modes/ask.ts",
+      "sha256": "ed696646f164f7b94f720f834b3a64d8255368649f84b565cbb3afaf632395e3",
+      "workspaceAndInstalledMatch": true
+    },
+    {
+      "package": "pi-sandbox-background-bridge",
+      "file": "src/extension.ts",
+      "sha256": "b71a82e01aa606683e5afbd82efd6ce14674c8a03832ee26c54ed304d3d85e2e",
+      "workspaceAndInstalledMatch": true
+    },
+    {
+      "package": "pi-sandbox-background-bridge",
+      "file": "src/config.ts",
+      "sha256": "d972c6d32c87b2cb5068f613f76952fa4e1ce5c3111530076d3f159db7784ead",
+      "workspaceAndInstalledMatch": true
+    },
+    {
+      "package": "background-carderne",
+      "file": "src/process.ts",
+      "sha256": "a587eb412e6df5c8b531cfa2a2ea02bba41d2b3767840cfccb93829005c01719",
+      "workspaceAndInstalledMatch": true
+    },
+    {
+      "package": "background-carderne",
+      "file": "src/sandbox.ts",
+      "sha256": "e1a0d341b022dafcea49252f539c30fc9ca43dfefc186770d362e44ff0a1f345",
+      "workspaceAndInstalledMatch": true
+    },
+    {
+      "package": "background-carderne",
+      "file": "src/runtime.ts",
+      "sha256": "742afb51f6356bf4b8d760fb520f9ee39a9d14d3a38ad8a797869dabaa65128d",
+      "workspaceAndInstalledMatch": true
+    }
+  ]
+}

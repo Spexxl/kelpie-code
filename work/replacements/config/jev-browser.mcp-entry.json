@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "jev-browser": {
+      "type": "stdio",
+      "command": "/home/sll/.nvm/versions/node/v24.21.0/bin/node",
+      "args": [
+        "/home/sll/.nvm/versions/node/v24.21.0/lib/node_modules/@jkudish/jev-browser/dist/index.js"
+      ],
+      "timeout": 610,
+      "enabled": true,
+      "exposure": "hidden",
+      "toolExposure": {
+        "jev_navigate": "codemode"
+      },
+      "description": "Jev Browser drives Chromium and can interact with websites. Requires a Jev provider key; browser processes are outside pi-sandbox bash enforcement. Plan and Ask must authorize nested calls."
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "name": "@m4riok/pi-ide-bridge",
+  "version": "0.2.0",
+  "description": "Pi extension for VS Code diff approval workflows and editor context bridging.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/m4riok/pi-ide-bridge"
+  },
+  "type": "module",
+  "keywords": [
+    "pi-package"
+  ],
+  "main": "index.ts",
+  "files": [
+    "index.ts",
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "typebox": "*"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-coding-agent": "^0.74.0",
+    "@types/node": "^20.17.10",
+    "typebox": "^1.1.38",
+    "typescript": "^5.7.2"
+  },
+  "pi": {
+    "extensions": [
+      "./index.ts"
+    ]
+  },
+  "dependencies": {
+    "string-width": "^8.2.1"
+  }
+}

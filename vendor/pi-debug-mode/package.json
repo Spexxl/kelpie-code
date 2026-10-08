@@ -1,0 +1,60 @@
+{
+  "name": "pi-debug-mode",
+  "version": "0.1.12",
+  "description": "Cursor-style debug mode for the Pi coding agent with evidence-first debugging, runtime probes, bug reproduction, root-cause analysis, minimal fixes, and verification.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Liu Shiyu",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liush2yuxjtu/pi-debug-mode.git"
+  },
+  "homepage": "https://liush2yuxjtu.github.io/pi-debug-mode/",
+  "bugs": "https://github.com/liush2yuxjtu/pi-debug-mode/issues",
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "pi coding agent",
+    "debug mode",
+    "debugger",
+    "runtime debugging",
+    "runtime instrumentation",
+    "bug reproduction",
+    "root cause analysis",
+    "evidence-driven debugging",
+    "hypothesis-driven debugging",
+    "verification",
+    "developer tools",
+    "cursor debug mode"
+  ],
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "pi": {
+    "extensions": [
+      "./src/usage-entry.ts"
+    ],
+    "image": "https://cdn.jsdelivr.net/gh/liush2yuxjtu/pi-debug-mode@v0.1.12/artifacts/demo/pi-debug-mode-preview.gif"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "typebox": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^5.9.0"
+  },
+  "scripts": {
+    "test": "node --experimental-strip-types --test test/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "verify:release": "node scripts/verify-release.mjs"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@nyn5255/telemetry": "^0.1.3"
+  }
+}

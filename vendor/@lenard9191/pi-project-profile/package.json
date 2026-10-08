@@ -1,0 +1,104 @@
+{
+  "name": "@lenard9191/pi-project-profile",
+  "version": "1.3.0",
+  "description": "Pi (π) coding-agent extension: project-aware system prompt for any repo (stack, commands, conventions, AGENTS.md/CLAUDE.md rules) plus a gate that runs the project's own typecheck/lint/tests after every agent turn, with self-repair and diff review.",
+  "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "John Lenard Requina"
+  },
+  "keywords": [
+    "pi-package",
+    "pi",
+    "pi-extension",
+    "pi-coding-agent",
+    "pi-skill",
+    "coding-agent",
+    "ai-agent",
+    "ai-coding-assistant",
+    "agent-harness",
+    "agent-skills",
+    "llm",
+    "project-profile",
+    "project-detection",
+    "repository-context",
+    "codebase-context",
+    "context-engineering",
+    "system-prompt",
+    "verification",
+    "quality-gate",
+    "guardrails",
+    "self-repair",
+    "feedback-loop",
+    "typecheck",
+    "lint",
+    "test-runner",
+    "code-review",
+    "diff-review",
+    "secret-detection",
+    "agents-md",
+    "claude-md",
+    "cursorrules",
+    "copilot-instructions",
+    "monorepo",
+    "developer-tools"
+  ],
+  "homepage": "https://jlrrequina.github.io/pi-project-profile/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jlrrequina/pi-project-profile.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jlrrequina/pi-project-profile/issues"
+  },
+  "files": [
+    "index.ts",
+    "config.ts",
+    "types.ts",
+    "fs-utils.ts",
+    "detect/",
+    "profile/",
+    "verify/",
+    "scripts/scan.ts",
+    "skills/",
+    "llms.txt",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22.18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "pi": {
+    "extensions": [
+      "./index.ts"
+    ],
+    "skills": [
+      "./skills"
+    ],
+    "image": "https://raw.githubusercontent.com/jlrrequina/pi-project-profile/main/docs/cover.png"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": ">=0.87.0",
+    "@earendil-works/pi-coding-agent": ">=0.87.0",
+    "@earendil-works/pi-tui": ">=0.87.0"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-ai": "1.0.0",
+    "@earendil-works/pi-coding-agent": "1.0.0",
+    "@earendil-works/pi-tui": "1.0.0",
+    "@types/node": "^24.19.0",
+    "fast-check": "4.10.2",
+    "typescript": "^5.9.3"
+  },
+  "scripts": {
+    "check": "tsc -p tsconfig.json",
+    "test": "node --test test/*.test.ts",
+    "scan": "node scripts/scan.ts",
+    "prepublishOnly": "npm run check && npm test",
+    "corpus": "node scripts/corpus.ts"
+  }
+}

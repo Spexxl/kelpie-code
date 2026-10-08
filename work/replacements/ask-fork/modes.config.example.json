@@ -1,0 +1,26 @@
+{
+  "defaultMode": "build",
+  "modes": {
+    "ask": {
+      "allowTools": [
+        "codemode",
+        "tool_search"
+      ],
+      "blockUnknownTools": true,
+      "thinkingLevel": null,
+      "bash": "deny"
+    },
+    "plan": {
+      "enabled": false
+    },
+    "review": {
+      "enabled": false
+    },
+    "debug": {
+      "enabled": false
+    },
+    "yolo": {
+      "enabled": false
+    }
+  }
+}

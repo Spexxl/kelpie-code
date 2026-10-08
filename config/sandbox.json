@@ -1,0 +1,10 @@
+{
+  "enabled": true,
+  "sandboxUserShell": true,
+  "allowBrowserProcess": false,
+  "network": {
+    "disabled": false,
+    "allowLocalBinding": false,
+    "allowAllUnixSockets": false
+  }
+}

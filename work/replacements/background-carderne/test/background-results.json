@@ -1,0 +1,89 @@
+{
+  "generatedAt": "2026-10-08T14:27:27.729Z",
+  "cases": [
+    {
+      "name": "operational-builtin-control",
+      "status": "passed"
+    },
+    {
+      "name": "denied-bg_task_spawn-dedicated",
+      "status": "passed"
+    },
+    {
+      "name": "denied-bg_task-spawn",
+      "status": "passed"
+    },
+    {
+      "name": "denied-bg_task_spawn-argv",
+      "status": "passed"
+    },
+    {
+      "name": "denied-bg_task_watch-dedicated",
+      "status": "passed"
+    },
+    {
+      "name": "denied-bg_task-watch",
+      "status": "passed"
+    },
+    {
+      "name": "allowed-long-job-is-nonblocking-and-cancellable",
+      "status": "passed"
+    },
+    {
+      "name": "alternate-cwd-cannot-change-policy",
+      "status": "passed"
+    },
+    {
+      "name": "symlink-and-dotdot-paths-cannot-escape",
+      "status": "passed"
+    },
+    {
+      "name": "shell-env-is-applied-inside-confinement",
+      "status": "passed"
+    },
+    {
+      "name": "registry-control-plane-is-not-writable",
+      "status": "passed"
+    },
+    {
+      "name": "bridge-source-is-not-writable",
+      "status": "passed"
+    },
+    {
+      "name": "live-watch-reloads-current-policy",
+      "status": "passed"
+    },
+    {
+      "name": "malformed-global-policy-blocks-launch",
+      "status": "passed"
+    },
+    {
+      "name": "malformed-trusted-project-policy-blocks-launch",
+      "status": "passed"
+    },
+    {
+      "name": "structured-SSH-does-not-claim-local-protection",
+      "status": "passed"
+    },
+    {
+      "name": "network-policy-denies-direct-host-socket",
+      "status": "passed"
+    },
+    {
+      "name": "missing-bridge-fails-closed",
+      "status": "passed"
+    },
+    {
+      "name": "explicit-off-is-visible-and-preserves-choice",
+      "status": "passed"
+    },
+    {
+      "name": "invalid-enabled-is-not-an-unconfined-opt-out",
+      "status": "passed"
+    },
+    {
+      "name": "resumed-watch-rebuilds-wrapper-under-current-policy",
+      "status": "passed"
+    }
+  ]
+}

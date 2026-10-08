@@ -1,0 +1,191 @@
+[
+  {
+    "name": "@earendil-works/pi-coding-agent",
+    "version": "1.1.0",
+    "directory": "vendor/@earendil-works/pi-coding-agent",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/earendil-works/pi.git",
+      "directory": "packages/coding-agent"
+    }
+  },
+  {
+    "name": "@jkudish/jev-browser",
+    "version": "0.8.4",
+    "directory": "vendor/@jkudish/jev-browser",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/jkudish/jev-browser.git"
+    }
+  },
+  {
+    "name": "pi-subagents",
+    "version": "0.76.1",
+    "directory": "vendor/pi-subagents",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/nicobailon/pi-subagents.git"
+    }
+  },
+  {
+    "name": "@narumitw/pi-plan-mode",
+    "version": "0.59.2",
+    "directory": "vendor/@narumitw/pi-plan-mode",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/narumiruna/pi-extensions",
+      "directory": "packages/pi-plan-mode"
+    }
+  },
+  {
+    "name": "pi-goal-x",
+    "version": "0.32.3",
+    "directory": "vendor/pi-goal-x",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/tmonk/pi-goal-x.git"
+    }
+  },
+  {
+    "name": "pi-memory",
+    "version": "0.4.2",
+    "directory": "vendor/pi-memory",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/jayzeng/pi-memory.git"
+    }
+  },
+  {
+    "name": "@lenard9191/pi-project-profile",
+    "version": "1.3.0",
+    "directory": "vendor/@lenard9191/pi-project-profile",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/jlrrequina/pi-project-profile.git"
+    }
+  },
+  {
+    "name": "@ff-labs/pi-fff",
+    "version": "0.11.0",
+    "directory": "vendor/@ff-labs/pi-fff",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/dmtrKovalenko/fff.git",
+      "directory": "packages/pi-fff"
+    }
+  },
+  {
+    "name": "pi-debug-mode",
+    "version": "0.1.12",
+    "directory": "vendor/pi-debug-mode",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/liush2yuxjtu/pi-debug-mode.git"
+    }
+  },
+  {
+    "name": "@m4riok/pi-ide-bridge",
+    "version": "0.2.0",
+    "directory": "vendor/@m4riok/pi-ide-bridge",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/m4riok/pi-ide-bridge"
+    }
+  },
+  {
+    "name": "pi-cc-extensions",
+    "version": "0.9.11",
+    "directory": "vendor/pi-cc-extensions",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/minuque/pi-cc-extensions.git"
+    }
+  },
+  {
+    "name": "@gagansd/pi-web-search",
+    "version": "0.2.1",
+    "directory": "vendor/@gagansd/pi-web-search",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/GaganSD/pi-extensions.git",
+      "directory": "pi-web-search"
+    }
+  },
+  {
+    "name": "pi-better-background-tasks",
+    "version": "0.8.0",
+    "directory": "vendor/pi-better-background-tasks",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/1aboveio/pi-better-harness.git",
+      "directory": "packages/pi-better-background-tasks"
+    }
+  },
+  {
+    "name": "pi-sandbox",
+    "version": "0.7.1",
+    "directory": "vendor/pi-sandbox",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/carderne/pi-sandbox.git"
+    }
+  },
+  {
+    "name": "@narumitw/pi-usage",
+    "version": "0.64.1",
+    "directory": "vendor/@narumitw/pi-usage",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/narumiruna/pi-extensions",
+      "directory": "packages/pi-usage"
+    }
+  },
+  {
+    "name": "@juicesharp/rpiv-ask-user-question",
+    "version": "2.12.0",
+    "directory": "vendor/@juicesharp/rpiv-ask-user-question",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/juicesharp/rpiv-mono.git",
+      "directory": "packages/rpiv-ask-user-question"
+    }
+  },
+  {
+    "name": "@juicesharp/rpiv-todo",
+    "version": "2.12.0",
+    "directory": "vendor/@juicesharp/rpiv-todo",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/juicesharp/rpiv-mono.git",
+      "directory": "packages/rpiv-todo"
+    }
+  },
+  {
+    "name": "@dreki-gg/pi-ask-mode",
+    "version": "0.3.3",
+    "directory": "vendor/@dreki-gg/pi-ask-mode",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/dreki-gg/pi-extensions",
+      "directory": "packages/ask-mode"
+    }
+  }
+]

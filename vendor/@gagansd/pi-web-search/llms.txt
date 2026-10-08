@@ -1,0 +1,20 @@
+# pi-web-search
+
+> Pi tools for best-effort public web (keyless Exa and native Parallel MCP fallback) and public code (grep.app, Sourcegraph, optional GitHub). Research and external Jev judgment are separate opt-ins, off by default.
+
+This file is a navigation index for agents, not an API specification. Paths are relative to this package. For the monorepo, see [root llms.txt](../llms.txt).
+
+## Documentation
+
+- [Package README](README.md): install, tools, defaults, optional setup, config, and code-search notes.
+- [Multi-source search and Jev](docs/research.md): judgment settings, exact Pi classifier pin, and fail-open behavior.
+
+## Source contracts
+
+- [Tool registration](src/index.ts): tools, first-run welcome, and `/web-search-settings`.
+- [Configuration resolver](src/providers/config.ts): accepted settings and defaults.
+- [Provider orchestration](src/providers/index.ts): ordinary chains versus research fan-out.
+- [Sourcegraph](src/providers/sourcegraph.ts): keyless stream search.
+- [GitHub](src/providers/github.ts): authenticated REST; token or `gh auth`.
+- [Jev classifier](src/jev/api.ts): Pi model registry typed classification.
+- [Structured output](src/format.ts): fields, previews, truncation, and errors.

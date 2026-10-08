@@ -1,0 +1,1 @@
+Templates: ${PI_AGENT_DIR} e ${JEV_BROWSER_ENTRY} devem ser expandidos antes do uso. O reinstalador escreve os caminhos da máquina de destino. Nenhuma chave está incluída. sandbox.json registra a política selecionada; revise antes de aplicar em outra máquina.
