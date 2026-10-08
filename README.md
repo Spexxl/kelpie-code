@@ -1,33 +1,33 @@
-# Pi Harness
+# kelpie-code
 
-Base preservada da integração Pi Agent + CodeMode + extensões, preparada para evoluir para um harness próprio com interface. O estado atual é uma stack CLI; a interface ainda não foi implementada.
+A preserved integration of Pi Agent, native CodeMode, and extensions, forming the foundation for a custom agent harness with a user interface. The current implementation is a CLI stack; the interface is planned.
 
-## O que está salvo
+## What's included
 
-- Código-fonte completo do monorepo Pi 1.1.0 em `upstream/pi/`, tag e commit registrados.
-- Pi 1.1.0 e Jev Browser 0.8.4: distribuição instalada em `vendor/`, com documentação e licenças upstream.
-- Todos os 16 plugins npm declarados, incluindo 13 ativos e 3 originais filtrados, também em `vendor/`.
-- Três forks mantidos em `work/replacements/`: Ask/CodeMode, Sandbox/Background e Background Tasks.
-- Código fonte upstream de Jev em `work/replacements/browser-upstream/`.
-- Templates de configuração, perfis de pesquisa, scripts de instalação, testes e evidências da revisão.
-- Lock de dependências dos plugins em `locks/`; inventário e limitações em `outputs/`.
+- The complete Pi 1.1.0 monorepo source in `upstream/pi/`, with its upstream tag and commit recorded.
+- Installed distributions of Pi 1.1.0 and Jev Browser 0.8.4 in `vendor/`, including upstream documentation and licenses.
+- All 16 declared npm extensions in `vendor/`: 13 active extensions and three originals whose extension entry points are disabled.
+- Three maintained forks in `work/replacements/`: Ask/CodeMode, the Sandbox/Background bridge, and Background Tasks.
+- Jev Browser upstream source in `work/replacements/browser-upstream/`.
+- Configuration templates, research profiles, installation scripts, tests, and review evidence.
+- Extension dependency locks in `locks/`, with the inventory and known limitations in `outputs/`.
 
-`vendor` preserva os arquivos publicados dos pacotes instalados, sem `node_modules`. O código-fonte do Pi também está preservado em `upstream/pi/`. As dependências transitivas são descritas no lock; runtimes Node, Chromium e dependências precisam ser instalados. As versões selecionadas são reinstaladas do npm pelo helper.
+`vendor/` preserves the published files of the installed packages, excluding `node_modules`. Pi's source is also preserved in `upstream/pi/`. Transitive extension dependencies are recorded in the lockfile; Node, Chromium, and runtime dependencies still need to be installed. The installation helper reinstalls the selected package versions from npm.
 
-## Restaurar
+## Restore the stack
 
-Linux, Bash, Python 3, NVM instalado e acesso à rede são os requisitos do helper. Feche o Pi antes de executar:
+The helper requires Linux, Bash, Python 3, an existing NVM installation, and network access. Close Pi before running:
 
 ```bash
 bash work/reinstall-stack.sh
 bash work/verify-install.sh
 ```
 
-O script instala Node 24.21.0, Pi e os plugins fixados, preserva backups de configurações existentes, aplica os forks e filtra os três originais. Instala Chromium e tenta instalar o complemento IDE via `code`; se o editor estiver disponível. Não autentica provedores. Os templates em `config/` são referência, não devem ser copiados com placeholders sem expansão.
+The script installs Node 24.21.0, Pi, and the pinned extensions, backs up existing configuration, applies the maintained forks, and disables the three original extension entry points. It also installs Chromium and attempts to install the IDE companion through `code` when the editor is available. Provider authentication must be configured separately. The templates in `config/` are reference files; expand their placeholders before using them.
 
-A política `config/sandbox.json` e os perfis `work/profiles/` são preservados separadamente: o reinstalador atual não os aplica automaticamente. Revise e copie para `~/.pi/agent/sandbox.json` e `~/.pi/agent/agents/` quando apropriado.
+The sandbox policy in `config/sandbox.json` and the profiles in `work/profiles/` are preserved separately. The current installer does not apply them automatically. Review them and copy them to `~/.pi/agent/sandbox.json` and `~/.pi/agent/agents/` as appropriate.
 
-## Verificação offline
+## Offline verification
 
 ```bash
 python3 scripts/link-test-dependencies.py
@@ -38,12 +38,12 @@ node work/replacements/final-installed-stack-smoke.mjs
 node work/replacements/browser-tests.mjs
 ```
 
-As suítes usam o SDK instalado e um provedor roteirizado, sem chamadas pagas. `PI_SDK_DIR` e `PI_PACKAGES_DIR` podem ajustar os caminhos. Consulte `docs/verification.md` para diferenciar testes atuais de evidências históricas.
+The suites use the installed SDK and a scripted provider, without paid API calls. Set `PI_SDK_DIR` and `PI_PACKAGES_DIR` to override installation paths. See [verification notes](docs/verification.md) for current checks, historical evidence, and pending validation.
 
-## Próxima evolução
+## Planned development
 
-Separar um controlador de sessões, um contrato de eventos e uma interface de usuário, reutilizando o SDK do Pi. Os contratos e fronteiras atuais estão em `docs/integration.md`; o roadmap está em `docs/roadmap.md`.
+Build a session controller, an explicit event contract, and a user interface on top of Pi's SDK. The existing integration contracts and boundaries are documented in [integration notes](docs/integration.md), with the proposed development path in the [roadmap](docs/roadmap.md).
 
-## Créditos e licença
+## Credits and licensing
 
-Os pacotes upstream mantêm autores e licenças próprias. Os forks locais derivam de projetos MIT e mantêm seus avisos. Consulte `vendor/manifest.json` e os arquivos LICENSE de cada pacote. Este repositório não assume autoria do Pi nem dos plugins de terceiros. Nenhuma credencial, conversa real ou estado pessoal do agente está incluído.
+Upstream packages retain their own authorship and licenses. The maintained forks derive from MIT-licensed projects and preserve their notices. See `vendor/manifest.json` and each package's license files. Original repository glue and documentation are covered by the root [MIT license](LICENSE); bundled upstream projects retain their respective licenses and copyright notices. Pi and third-party extensions remain credited to their original authors. Credentials, real conversations, and personal agent state are excluded.
